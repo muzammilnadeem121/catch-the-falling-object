@@ -3,6 +3,9 @@ const gameContainer = document.querySelector('.game-container');
 const scoreDisplay = document.getElementById('score');
 let action = document.getElementById("actions");
 
+let highscore = localStorage.getItem("high-score") || 0
+document.getElementById("hi-score").innerText = `high-score : ${highscore}`
+
 let score = 0;
 let gamemode = "play";
 
@@ -96,6 +99,11 @@ function createFallingObject() {
             score++;
         }
         scoreDisplay.textContent = `Score: ${score}`;
+        if (score >= highscore) {
+          highscore = score
+          localStorage.setItem("high-score",highscore)
+          document.getElementById("hi-score").innerText = `high-score : ${highscore}`
+        }
         object.remove();
         clearInterval(fallInterval);
       } else if (objectTop >= gameContainer.clientHeight - object.offsetHeight) {
