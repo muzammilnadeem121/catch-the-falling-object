@@ -32,9 +32,14 @@ document.addEventListener('mousemove', (e) => {
 });
 
 if (window.innerWidth <= 450) {
+  basket.style.transition = "1s left ease"
+
   let startX, endX;
 
   document.addEventListener("touchstart", (e) => {
+    if(gamemode == "pause"){
+      return
+     }
     startX = e.changedTouches[0].clientX;
   });
 
