@@ -31,20 +31,31 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-if (window.clientWidth <= 450 ) {
-  let startX , endX
-  document.addEventListener("touchstart",(e)=>{
-    startX  = e.changedTouches[0].clientX
-  })
-  document.addEventListener("touchend",(e)=>{
-    endX = e.changedTouches[0].clientX
-    let change = startX - endX
-  
-    if (change >= 0 && change <= gameContainer.clientWidth - basket.offsetWidth) {
-      basket.style.left = change + 'px';
+if (window.innerWidth <= 450) {
+  let startX, endX;
+
+  document.addEventListener("touchstart", (e) => {
+    startX = e.changedTouches[0].clientX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    let change = startX - endX;
+
+    let basketLeft = parseInt(window.getComputedStyle(basket).left, 10) || 0;
+
+    let newPosition = basketLeft - change;
+
+    if (newPosition < 0) {
+      newPosition = 0;
+    } else if (newPosition > gameContainer.clientWidth - basket.offsetWidth) {
+      newPosition = gameContainer.clientWidth - basket.offsetWidth;
     }
-  }) 
+
+    basket.style.left = newPosition + 'px';
+  });
 }
+
 
 function createFallingObject() {
   if (gamemode == "pause") {
