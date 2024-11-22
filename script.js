@@ -80,13 +80,13 @@ function createFallingObject() {
     let objectTop = parseInt(window.getComputedStyle(object).getPropertyValue('top'));
 
     if (gamemode == "play") {
-    if (score > 50) {
+    if (score >= 50) {
       object.style.top = objectTop + 10 + 'px';
     }
-    else if (score > 100) {
+    else if (score >= 100) {
       object.style.top = objectTop + 15 + 'px';
     }
-    else if(score < 50){
+    else if(score <= 50){
       object.style.top = objectTop + 5 + 'px';
     }
   }
